@@ -8,23 +8,37 @@ import { HousingLocation } from '../housing-location';
 })
 export class HousingListComponent implements OnInit {
 
-  @Input() locationList: HousingLocation[] = [];
-  results: HousingLocation[] = [];
-
-  @Output() locationSelectedEvent = new EventEmitter<HousingLocation>();
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  searchHousingLocations(searchText: string) {
-    if (!searchText) return;
+  @Input() locationList: HousingLocation[] = [];
+  results: HousingLocation[] = [];
 
-    this.results = this.locationList.filter((location: any) => location.city.toLowerCase().includes(searchText.toLowerCase()));
+  @Output() locationSelectedEvent = new EventEmitter<HousingLocation>(); 
+
+
+  // mehtod to trigger locationSelectedEvent when a user clicks on a search result @param location of type HousingLocation 
+  selectHousingLocation(location: HousingLocation){
+    this.locationSelectedEvent.emit(location);
+
   }
 
-  selectHousingLocation(location: HousingLocation) {
-    this.locationSelectedEvent.emit(location);
+  /**
+   * Method to display a result set to filter the locationList by the user input and display it 
+   * @param searchText 
+   * @returns filtered result set or none if searchText is empty
+   */
+  searchHousingLocations(searchText: string) {
+    if(!searchText) return; 
+    this.results = this.locationList.filter(
+      (location: HousingLocation) => location.city
+        .toLowerCase()
+        .includes(
+          searchText.toLowerCase()
+
+        ));
+    return this.results; 
   }
 }
