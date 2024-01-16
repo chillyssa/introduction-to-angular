@@ -1,0 +1,39 @@
+img {
+    border-radius: 5px;
+    width: 100%;
+}
+
+article {
+    margin: 10px 0 10px 0;
+    color: #202845;
+}
+
+article,
+article>p {
+    color: #202845;
+}
+
+article>p:first-of-type {
+    font-weight: bold;
+    font-size: 22pt;
+}
+
+button {
+    width: 70px;
+    height: 42px;
+    background-color: #4468e8;
+    color: white;
+    border: solid 1px #4468e8;
+    border-radius: 0 2px 2px 0;
+}
+
+section {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

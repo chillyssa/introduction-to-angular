@@ -1,0 +1,13 @@
+<section>
+    <button (click)="goBack()">Back</button>
+    <article>
+        <ng-container *ngIf="selectedLocation">
+            <img [src]="selectedLocation?.photo">
+            <p>{{selectedLocation?.name}}</p>
+            <p>{{selectedLocation?.city}}, {{selectedLocation?.state}}</p>
+            <p>Available Units: {{selectedLocation?.availableUnits}}</p>
+            <P>Laundry: {{selectedLocation?.laundry ? "Yes" : "No"}}</P>
+            <p>Wifi: {{selectedLocation?.wifi ? "Yes" : "No"}}</p>
+        </ng-container>
+    </article>
+</section>

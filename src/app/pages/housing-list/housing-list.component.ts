@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HousingLocation } from '../housing-location';
+import { Component, OnInit } from '@angular/core';
+import { HousingLocation } from '../../housing-location';
+import { LocationService } from 'src/app/service/location.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-housing-list',
@@ -8,21 +10,18 @@ import { HousingLocation } from '../housing-location';
 })
 export class HousingListComponent implements OnInit {
 
-  constructor() { }
+  locationList: HousingLocation[] = [];
+  results: HousingLocation[] = [];
+
+  constructor(private router: Router, private locationService: LocationService) {
+    this.locationList = this.locationService.getLocations();
+  }
 
   ngOnInit(): void {
   }
-
-  @Input() locationList: HousingLocation[] = [];
-  results: HousingLocation[] = [];
-
-  @Output() locationSelectedEvent = new EventEmitter<HousingLocation>(); 
-
-
   // mehtod to trigger locationSelectedEvent when a user clicks on a search result @param location of type HousingLocation 
-  selectHousingLocation(location: HousingLocation){
-    this.locationSelectedEvent.emit(location);
-
+  selectHousingLocation(location: HousingLocation) {
+    this.router.navigate(['/housing-details', location.city]);
   }
 
   /**
@@ -31,7 +30,7 @@ export class HousingListComponent implements OnInit {
    * @returns filtered result set or none if searchText is empty
    */
   searchHousingLocations(searchText: string) {
-    if(!searchText) return; 
+    if (!searchText) return;
     this.results = this.locationList.filter(
       (location: HousingLocation) => location.city
         .toLowerCase()
@@ -39,6 +38,6 @@ export class HousingListComponent implements OnInit {
           searchText.toLowerCase()
 
         ));
-    return this.results; 
+    return this.results;
   }
 }

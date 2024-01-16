@@ -44,3 +44,13 @@ label {
     display: block;
     color: #888c9c;
 }
+section {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
